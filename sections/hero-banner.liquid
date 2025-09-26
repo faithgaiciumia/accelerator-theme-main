@@ -1,0 +1,20 @@
+<section class="hero-banner">
+  <div class="hero-banner_content">
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.subheading }}</p>
+    <a href="{{ section.settings.button_link }}" class="btn">
+      {{ section.settings.button_label }}
+    </a>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "New Arrivals" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our boutique collection" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "button_label", "label": "Button text", "default": "Shop Now" }
+  ]
+}
+{% endschema %}
