@@ -1,12 +1,21 @@
 {
   "sections": {
-    "hero-banner":{
-      "type":"hero-banner",
-      "settings":{}
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {},
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "heading": "New Arrivals",
+            "subheading": "Discover our boutique collection",
+            "button_link": "/collections/all",
+            "button_label": "Shop Now"
+          }
+        }
+      },
+      "block_order": ["slide-1"]
     }
-    
   },
-  "order": [
-    "hero-banner"
-  ]
+  "order": ["hero-banner"]
 }
