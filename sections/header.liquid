@@ -4,8 +4,38 @@
   <div class="container">
     <details class="dialog drawer overlay">
       <summary aria-haspopup="dialog" aria-controls="MenuDrawer">
-        <span class="button">{{ 'sections.header.menu' | t }}</span>
-        <span class="dialog-close button" aria-label="Close menu">{{ 'general.dialog.close' | t }}</span>
+        <span class="menu-btn" aria-label="Open menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-menu-icon lucide-menu"
+          >
+            <path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>
+          </svg>
+        </span>
+        <span class="dialog-close menu-btn" aria-label="Close menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x-icon lucide-x"
+          >
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </span>
       </summary>
       <nav id="MenuDrawer" role="dialog" aria-label="Menu" aria-modal="true">
         <div class="dialog-body">
@@ -14,7 +44,8 @@
               <li>
                 {%- if link.links != blank -%}
                   <details class="disclosure">
-                    <summary class="menu-item{% if link.child_active %} active{% endif %}" 
+                    <summary
+                      class="menu-item{% if link.child_active %} active{% endif %}"
                       role="button"
                       aria-expanded="true"
                       aria-controls="MenuItem-{{ forloop.index }}-Submenu"
@@ -28,15 +59,19 @@
                         {%- for childlink in link.links -%}
                           <li>
                             {%- if childlink.links == blank -%}
-                              <a href="{{ childlink.url }}"
-                                class="menu-item{% if childlink.current %} active{% endif %}" 
-                                {% if childlink.current %} aria-current="page"{% endif %}
+                              <a
+                                href="{{ childlink.url }}"
+                                class="menu-item{% if childlink.current %} active{% endif %}"
+                                {% if childlink.current %}
+                                  aria-current="page"
+                                {% endif %}
                               >
                                 {{ childlink.title | escape }}
                               </a>
                             {% else %}
                               <details class="disclosure">
-                                <summary class="menu-item{% if link.child_active %} active{% endif %}" 
+                                <summary
+                                  class="menu-item{% if link.child_active %} active{% endif %}"
                                   role="button"
                                   aria-expanded="true"
                                   aria-controls="MenuItem-{{ forloop.index }}-Submenu"
@@ -45,14 +80,19 @@
                                 </summary>
                                 <div id="MenuItem-{{ forloop.index }}-Submenu">
                                   <ul class="submenu list-unstyled">
-                                  {%- for grandchildlink in childlink.links -%}
-                                    <li>
-                                      <a href="{{ grandchildlink.url }}" class="menu-item{% if grandchildlink.current %} active{% endif %}" 
-                                        {% if childlink.current %} aria-current="page"{% endif %}>
-                                        {{ grandchildlink.title | escape }}
-                                      </a>
-                                    </li>
-                                  {%- endfor -%}
+                                    {%- for grandchildlink in childlink.links -%}
+                                      <li>
+                                        <a
+                                          href="{{ grandchildlink.url }}"
+                                          class="menu-item{% if grandchildlink.current %} active{% endif %}"
+                                          {% if childlink.current %}
+                                            aria-current="page"
+                                          {% endif %}
+                                        >
+                                          {{ grandchildlink.title | escape }}
+                                        </a>
+                                      </li>
+                                    {%- endfor -%}
                                   </ul>
                                 </div>
                               </details>
@@ -63,11 +103,18 @@
                     </div>
                   </details>
                 {%- else -%}
-                  <a href="{{ link.url }}"
+                  <a
+                    href="{{ link.url }}"
                     class="menu-item{% if link.current %} active{% endif %}"
-                    {% if link.current %} aria-current="page"{% endif %}
+                    {% if link.current %}
+                      aria-current="page"
+                    {% endif %}
                   >
-                    <span {%- if link.current %} class="active"{% endif %}>
+                    <span
+                      {%- if link.current %}
+                        class="active"
+                      {% endif %}
+                    >
                       {{ link.title | escape }}
                     </span>
                   </a>
@@ -83,30 +130,94 @@
       {%- if request.page_type == 'index' -%}
         <h1>
       {%- endif -%}
-        <a href="{{ routes.root_url }}">
-          {%- if section.settings.logo != blank -%}
-            {{ section.settings.logo |
-              image_url: width: 250 |
-              image_tag: width: 125, alt: section.settings.logo.alt | default: shop.name | escape 
-            }}
-          {%- else -%}
-            <span class="h2">{{ shop.name }}</span>
-          {%- endif -%}
-        </a>
-      {%- if request.page_type == "index" -%}
+      <a href="{{ routes.root_url }}">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 250
+            | image_tag: width: 125, alt: section.settings.logo.alt
+            | default: shop.name
+            | escape
+          }}
+        {%- else -%}
+          <span class="h2">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
     </div>
-    
+
     <div class="utility-links">
-      <a href="{{ routes.search_url }}">{{ 'sections.header.search' | t }}</a>
+      <a href="{{ routes.search_url }}">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-search-icon lucide-search"
+        >
+          <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+        </svg>
+      </a>
       {%- if customer -%}
-        <a href="{{ routes.account_url }}">{{ 'sections.header.account' | t }}</a>
+        <a href="{{ routes.account_url }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-user-icon lucide-user"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
       {%- else -%}
-        <a href="{{ routes.account_login_url }}">{{ 'sections.header.login' | t }}</a>
+        <a href="{{ routes.account_login_url }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-user-icon lucide-user"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
       {%- endif -%}
       <a href="{{ routes.cart_url }}">
-        {{ 'sections.header.cart' | t }} <span id="CartBubble">{% unless cart == empty %}({{ cart.item_count }}){% endunless %}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-shopping-cart-icon lucide-shopping-cart"
+        >
+          <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+        </svg>
+        <span id="CartBubble">
+          {%- unless cart == empty %}({{ cart.item_count }}){% endunless -%}
+        </span>
       </a>
     </div>
   </div>
@@ -136,7 +247,7 @@
 </script>
 
 {%- if request.page_type == 'index' -%}
-  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",

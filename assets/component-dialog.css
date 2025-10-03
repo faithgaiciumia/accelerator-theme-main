@@ -14,7 +14,9 @@
 /* Toggle (open/close) */
 
 .dialog > summary {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dialog > summary .dialog-close {
@@ -31,7 +33,7 @@
   position: fixed;
   z-index: 3;
   top: 10px;
-  left: 10px;
+  right: 72%;
 }
 
 /* Creates clickable overlay backdrop */
